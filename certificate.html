@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Professional Certificate Generator</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        color: #333;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+        color: white;
+      }
+
+      .header h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .header p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      .main-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .card-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .card-header h2 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+
+      .card-body {
+        padding: 40px;
+      }
+
+      .form-section {
+        margin-bottom: 35px;
+      }
+
+      .section-title {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e9ecef;
+        display: flex;
+        align-items: center;
+      }
+
+      .section-icon {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        font-size: 18px;
+        color: white;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #495057;
+        font-size: 0.9rem;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: #fff;
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+
+      .form-control:hover {
+        border-color: #ced4da;
+      }
+
+      textarea.form-control {
+        resize: vertical;
+        min-height: 80px;
+      }
+
+      .btn {
+        padding: 15px 30px;
+        border: none;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        margin: 10px 10px 10px 0;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+      }
+
+      .btn-secondary {
+        background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+        color: white;
+      }
+
+      .btn-success {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        color: white;
+      }
+
+      .btn-warning {
+        background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+        color: #212529;
+      }
+
+      .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none !important;
+      }
+
+      .btn-icon {
+        margin-right: 8px;
+      }
+
+      .status-message {
+        padding: 15px 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        font-weight: 500;
+      }
+
+      .status-success {
+        background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .status-error {
+        background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      .status-loading {
+        background: linear-gradient(135deg, #cce5ff 0%, #b3d9ff 100%);
+        color: #004085;
+        border: 1px solid #b3d9ff;
+      }
+
+      .actions-section {
+        background: #f8f9fa;
+        padding: 30px;
+        border-radius: 15px;
+        margin-top: 30px;
+        text-align: center;
+      }
+
+      .quick-fill {
+        background: #e9ecef;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+      }
+
+      .quick-fill h4 {
+        margin-bottom: 15px;
+        color: #495057;
+      }
+
+      .preview-container {
+        max-width: 100%;
+        overflow: auto;
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        margin-top: 20px;
+      }
+
+      .loading-spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid #ffffff;
+        border-radius: 50%;
+        border-top-color: transparent;
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 10px;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .device-icon {
+        background: linear-gradient(135deg, #28a745, #20c997);
+      }
+      .process-icon {
+        background: linear-gradient(135deg, #fd7e14, #f39c12);
+      }
+      .verification-icon {
+        background: linear-gradient(135deg, #dc3545, #e74c3c);
+      }
+      .additional-icon {
+        background: linear-gradient(135deg, #6f42c1, #8e44ad);
+      }
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .container {
+          padding: 10px;
+        }
+
+        .card-body {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🏆 Professional Certificate Generator</h1>
+        <p>Enterprise-Grade Data Sanitization Certificates</p>
+      </div>
+
+      <div class="main-card">
+        <div class="card-header">
+          <h2>Certificate Generation Portal</h2>
+          <p>
+            Create professional certificates with flagship design and premium
+            styling
+          </p>
+        </div>
+
+        <div class="card-body">
+          <form id="certificateForm">
+            <!-- Quick Fill Section -->
+            <div class="quick-fill">
+              <h4>⚡ Quick Fill Options</h4>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                onclick="fillSampleData()"
+              >
+                <span class="btn-icon">📋</span>Sample Data
+              </button>
+              <button
+                type="button"
+                class="btn btn-warning"
+                onclick="fillMinimalData()"
+              >
+                <span class="btn-icon">⚡</span>Minimal Data
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                onclick="clearForm()"
+              >
+                <span class="btn-icon">🗑️</span>Clear Form
+              </button>
+            </div>
+
+            <!-- Certificate Information -->
+            <div class="form-section">
+              <div class="section-title">
+                <div
+                  class="section-icon"
+                  style="background: linear-gradient(135deg, #17a2b8, #138496)"
+                >
+                  📜
+                </div>
+                Certificate Information
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="certificate_id">Certificate ID</label>
+                  <input
+                    type="text"
+                    id="certificate_id"
+                    name="certificate_id"
+                    class="form-control"
+                    placeholder="CERT-2024-001"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="technician_name">Technician Name</label>
+                  <input
+                    type="text"
+                    id="technician_name"
+                    name="technician_name"
+                    class="form-control"
+                    placeholder="Dr. Sarah Johnson"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="supervisor_name">Supervisor Name</label>
+                  <input
+                    type="text"
+                    id="supervisor_name"
+                    name="supervisor_name"
+                    class="form-control"
+                    placeholder="Michael Chen"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="final_status">Final Status</label>
+                  <select
+                    id="final_status"
+                    name="final_status"
+                    class="form-control"
+                  >
+                    <option value="PASSED">✅ PASSED</option>
+                    <option value="FAILED">❌ FAILED</option>
+                    <option value="WARNING">⚠️ WARNING</option>
+                    <option value="VERIFIED">🔐 VERIFIED</option>
+                    <option value="COMPLETED">✔️ COMPLETED</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Device Information -->
+            <div class="form-section">
+              <div class="section-title">
+                <div class="section-icon device-icon">💾</div>
+                Device Information
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="device_type">Device Type</label>
+                  <select
+                    id="device_type"
+                    name="device_type"
+                    class="form-control"
+                  >
+                    <option value="Enterprise SSD">Enterprise SSD</option>
+                    <option value="SSD">SSD</option>
+                    <option value="HDD">HDD</option>
+                    <option value="NVMe SSD">NVMe SSD</option>
+                    <option value="USB Drive">USB Drive</option>
+                    <option value="Server Drive">Server Drive</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="manufacturer">Manufacturer</label>
+                  <input
+                    type="text"
+                    id="manufacturer"
+                    name="manufacturer"
+                    class="form-control"
+                    placeholder="Samsung"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="model">Model</label>
+                  <input
+                    type="text"
+                    id="model"
+                    name="model"
+                    class="form-control"
+                    placeholder="SSD 990 PRO"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="serial_number">Serial Number</label>
+                  <input
+                    type="text"
+                    id="serial_number"
+                    name="serial_number"
+                    class="form-control"
+                    placeholder="S6M2NG0R987654"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="asset_tag">Asset Tag</label>
+                  <input
+                    type="text"
+                    id="asset_tag"
+                    name="asset_tag"
+                    class="form-control"
+                    placeholder="CORP-SSD-12345"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="capacity">Capacity</label>
+                  <input
+                    type="text"
+                    id="capacity"
+                    name="capacity"
+                    class="form-control"
+                    placeholder="2TB"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Sanitization Process -->
+            <div class="form-section">
+              <div class="section-title">
+                <div class="section-icon process-icon">🔄</div>
+                Sanitization Process
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="sanitization_method">Sanitization Method</label>
+                  <input
+                    type="text"
+                    id="sanitization_method"
+                    name="sanitization_method"
+                    class="form-control"
+                    placeholder="Cryptographic Erase + Multi-Pass Overwrite"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="standard_compliance">Standard Compliance</label>
+                  <input
+                    type="text"
+                    id="standard_compliance"
+                    name="standard_compliance"
+                    class="form-control"
+                    placeholder="NIST SP 800-88 Rev. 1, DoD 5220.22-M"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="algorithm">Algorithm</label>
+                  <input
+                    type="text"
+                    id="algorithm"
+                    name="algorithm"
+                    class="form-control"
+                    placeholder="AES-256 + Gutmann Method"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="duration">Duration</label>
+                  <input
+                    type="text"
+                    id="duration"
+                    name="duration"
+                    class="form-control"
+                    placeholder="2 hours 15 minutes"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="software_used">Software Used</label>
+                  <input
+                    type="text"
+                    id="software_used"
+                    name="software_used"
+                    class="form-control"
+                    placeholder="SecureErase Pro Enterprise"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="software_version">Software Version</label>
+                  <input
+                    type="text"
+                    id="software_version"
+                    name="software_version"
+                    class="form-control"
+                    placeholder="3.2.1"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Verification Results -->
+            <div class="form-section">
+              <div class="section-title">
+                <div class="section-icon verification-icon">✓</div>
+                Verification Results
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="verification_method">Verification Method</label>
+                  <input
+                    type="text"
+                    id="verification_method"
+                    name="verification_method"
+                    class="form-control"
+                    placeholder="Hexadecimal Deep Scan + Entropy Analysis"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="data_remnants">Data Remnants</label>
+                  <input
+                    type="text"
+                    id="data_remnants"
+                    name="data_remnants"
+                    class="form-control"
+                    placeholder="None Detected (0.00%)"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="os_installation_status"
+                    >OS Installation Status</label
+                  >
+                  <input
+                    type="text"
+                    id="os_installation_status"
+                    name="os_installation_status"
+                    class="form-control"
+                    placeholder="Windows 11 Enterprise Installed"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="os_version">OS Version</label>
+                  <input
+                    type="text"
+                    id="os_version"
+                    name="os_version"
+                    class="form-control"
+                    placeholder="Windows 11 Enterprise 22H2 Build 22621"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="form-section">
+              <div class="section-title">
+                <div class="section-icon additional-icon">📋</div>
+                Additional Information
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="customer_name">Customer Name</label>
+                  <input
+                    type="text"
+                    id="customer_name"
+                    name="customer_name"
+                    class="form-control"
+                    placeholder="GlobalTech Industries"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="work_order">Work Order</label>
+                  <input
+                    type="text"
+                    id="work_order"
+                    name="work_order"
+                    class="form-control"
+                    placeholder="WO-2024-SEC-001"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="location">Location</label>
+                  <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    class="form-control"
+                    placeholder="Secure Data Center - Building A"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="witness_name">Witness Name</label>
+                  <input
+                    type="text"
+                    id="witness_name"
+                    name="witness_name"
+                    class="form-control"
+                    placeholder="Alex Rodriguez (Security Officer)"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="notes">Notes</label>
+                <textarea
+                  id="notes"
+                  name="notes"
+                  class="form-control"
+                  rows="3"
+                  placeholder="Enterprise-grade sanitization completed with full compliance verification. Device certified for secure redeployment in production environment."
+                ></textarea>
+              </div>
+            </div>
+          </form>
+
+          <!-- Actions Section -->
+          <div class="actions-section">
+            <h3 style="margin-bottom: 20px; color: #495057">
+              🚀 Generate Certificate
+            </h3>
+
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="downloadCertificate()"
+              id="downloadBtn"
+            >
+              <span class="btn-icon">📄</span>Download PDF Certificate
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-success"
+              onclick="previewCertificate()"
+              id="previewBtn"
+            >
+              <span class="btn-icon">👁️</span>Preview Certificate
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="testAPI()"
+              id="testBtn"
+            >
+              <span class="btn-icon">🔧</span>Test API Connection
+            </button>
+          </div>
+
+          <!-- Status Messages -->
+          <div id="statusContainer"></div>
+
+          <!-- Preview Container -->
+          <div
+            id="previewContainer"
+            class="preview-container"
+            style="display: none"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const API_BASE_URL = "http://localhost:5000"
+
+      function showStatus(message, type = "success") {
+        const container = document.getElementById("statusContainer")
+        const statusDiv = document.createElement("div")
+        statusDiv.className = `status-message status-${type}`
+        statusDiv.innerHTML = message
+
+        container.innerHTML = ""
+        container.appendChild(statusDiv)
+
+        if (type !== "loading") {
+          setTimeout(() => {
+            statusDiv.style.opacity = "0"
+            setTimeout(() => container.removeChild(statusDiv), 300)
+          }, 5000)
+        }
+      }
+
+      function setButtonLoading(buttonId, loading, originalText) {
+        const button = document.getElementById(buttonId)
+        if (loading) {
+          button.disabled = true
+          button.innerHTML = `<span class="loading-spinner"></span>${originalText}...`
+        } else {
+          button.disabled = false
+          button.innerHTML = originalText
+        }
+      }
+
+      function getFormData() {
+        const form = document.getElementById("certificateForm")
+        const formData = new FormData(form)
+        const data = {}
+
+        for (let [key, value] of formData.entries()) {
+          if (value.trim()) data[key] = value
+        }
+
+        // Add timestamps
+        const now = new Date()
+        data.issue_date = now.toISOString().replace("T", " ").substr(0, 19)
+        data.verification_date = now.toISOString().substr(0, 10)
+
+        return data
+      }
+
+      async function previewCertificate() {
+        const originalText =
+          '<span class="btn-icon">👁️</span>Preview Certificate'
+        setButtonLoading("previewBtn", true, "Loading Preview")
+        showStatus(
+          '<span class="loading-spinner"></span>Generating certificate preview...',
+          "loading"
+        )
+
+        try {
+          const data = getFormData()
+          const response = await fetch(`${API_BASE_URL}/preview-certificate`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          })
+
+          const result = await response.json()
+
+          if (!result.success) {
+            throw new Error(result.error)
+          }
+
+          const previewContainer = document.getElementById("previewContainer")
+          previewContainer.innerHTML = result.html_content
+          previewContainer.style.display = "block"
+
+          // Scroll to preview
+          previewContainer.scrollIntoView({ behavior: "smooth" })
+
+          showStatus("👁️ Certificate preview loaded successfully!", "success")
+        } catch (error) {
+          console.error("Error:", error)
+          showStatus(`❌ Error loading preview: ${error.message}`, "error")
+        } finally {
+          setButtonLoading("previewBtn", false, originalText)
+        }
+      }
+
+      async function testAPI() {
+        const originalText =
+          '<span class="btn-icon">🔧</span>Test API Connection'
+        setButtonLoading("testBtn", true, "Testing Connection")
+        showStatus(
+          '<span class="loading-spinner"></span>Testing API connection...',
+          "loading"
+        )
+
+        try {
+          // Test health endpoint first
+          const healthResponse = await fetch(`${API_BASE_URL}/health`)
+          const healthData = await healthResponse.json()
+
+          if (!healthResponse.ok) {
+            throw new Error("Health check failed")
+          }
+
+          // Test with sample data
+          const testData = {
+            test: "connection",
+            timestamp: new Date().toISOString(),
+          }
+          const testResponse = await fetch(`${API_BASE_URL}/api/test`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(testData),
+          })
+
+          const testResult = await testResponse.json()
+
+          if (!testResponse.ok) {
+            throw new Error("API test failed")
+          }
+
+          showStatus(
+            `✅ API Connection Successful!<br>
+                          📊 Service: ${healthData.service}<br>
+                          🕒 Server Time: ${healthData.timestamp}<br>
+                          📡 Response: ${testResult.message}`,
+            "success"
+          )
+        } catch (error) {
+          console.error("Error:", error)
+          let errorMsg = error.message
+          if (error.message.includes("fetch")) {
+            errorMsg =
+              "Cannot connect to server. Make sure the Python backend is running on http://localhost:5000"
+          }
+          showStatus(`❌ API Connection Failed: ${errorMsg}`, "error")
+        } finally {
+          setButtonLoading("testBtn", false, originalText)
+        }
+      }
+
+      function fillSampleData() {
+        const sampleData = {
+          certificate_id: "CERT-2024-FLAGSHIP-001",
+          technician_name: "Dr. Sarah Johnson",
+          supervisor_name: "Michael Chen",
+          final_status: "PASSED",
+          device_type: "Enterprise SSD",
+          manufacturer: "Samsung",
+          model: "SSD 990 PRO",
+          serial_number: "S6M2NG0R987654",
+          asset_tag: "CORP-SSD-12345",
+          capacity: "2TB",
+          sanitization_method: "Cryptographic Erase + Multi-Pass Overwrite",
+          standard_compliance: "NIST SP 800-88 Rev. 1, DoD 5220.22-M",
+          algorithm: "AES-256 + Gutmann Method",
+          duration: "2 hours 15 minutes",
+          software_used: "SecureErase Pro Enterprise",
+          software_version: "3.2.1",
+          verification_method: "Hexadecimal Deep Scan + Entropy Analysis",
+          data_remnants: "None Detected (0.00%)",
+          os_installation_status: "Windows 11 Enterprise Installed",
+          os_version: "Windows 11 Enterprise 22H2 Build 22621",
+          customer_name: "GlobalTech Industries",
+          work_order: "WO-2024-SEC-001",
+          location: "Secure Data Center - Building A",
+          witness_name: "Alex Rodriguez (Security Officer)",
+          notes:
+            "Enterprise-grade sanitization completed with full compliance verification. Device certified for secure redeployment in production environment.",
+        }
+
+        fillFormData(sampleData)
+        showStatus("📋 Sample data loaded successfully!", "success")
+      }
+
+      function fillMinimalData() {
+        const minimalData = {
+          certificate_id: "CERT-MIN-001",
+          technician_name: "John Doe",
+          final_status: "VERIFIED",
+          device_type: "SSD",
+          manufacturer: "Samsung",
+          model: "980 PRO",
+          customer_name: "Test Corporation",
+        }
+
+        fillFormData(minimalData)
+        showStatus("⚡ Minimal data loaded successfully!", "success")
+      }
+
+      function fillFormData(data) {
+        Object.keys(data).forEach((key) => {
+          const element = document.getElementById(key)
+          if (element) {
+            element.value = data[key]
+          }
+        })
+      }
+
+      function clearForm() {
+        document.getElementById("certificateForm").reset()
+        document.getElementById("previewContainer").style.display = "none"
+        document.getElementById("statusContainer").innerHTML = ""
+        showStatus("🗑️ Form cleared successfully!", "success")
+      }
+
+      // Auto-generate certificate ID if empty
+      document
+        .getElementById("certificate_id")
+        .addEventListener("focus", function () {
+          if (!this.value) {
+            const now = new Date()
+            const timestamp =
+              now.getFullYear().toString() +
+              (now.getMonth() + 1).toString().padStart(2, "0") +
+              now.getDate().toString().padStart(2, "0")
+            const random = Math.floor(Math.random() * 1000)
+              .toString()
+              .padStart(3, "0")
+            this.value = `CERT-${timestamp}-${random}`
+          }
+        })
+
+      // Initialize with connection test
+      window.addEventListener("load", function () {
+        setTimeout(() => {
+          showStatus(
+            '🚀 Professional Certificate Generator loaded! Click "Test API Connection" to verify backend connectivity.',
+            "success"
+          )
+        }, 1000)
+      })
+
+      // Form validation
+      function validateForm() {
+        const required = [
+          "certificate_id",
+          "technician_name",
+          "device_type",
+          "final_status",
+        ]
+        const missing = []
+
+        required.forEach((field) => {
+          const element = document.getElementById(field)
+          if (!element.value.trim()) {
+            missing.push(field.replace("_", " ").toUpperCase())
+          }
+        })
+
+        if (missing.length > 0) {
+          showStatus(
+            `❌ Please fill in required fields: ${missing.join(", ")}`,
+            "error"
+          )
+          return false
+        }
+        return true
+      }
+
+      // Override download function to include validation
+      const originalDownloadCertificate = downloadCertificate
+      downloadCertificate = function () {
+        if (validateForm()) {
+          originalDownloadCertificate()
+        }
+      }
+
+      // Add keyboard shortcuts
+      document.addEventListener("keydown", function (e) {
+        if (e.ctrlKey || e.metaKey) {
+          switch (e.key) {
+            case "s":
+              e.preventDefault()
+              fillSampleData()
+              break
+            case "d":
+              e.preventDefault()
+              if (validateForm()) downloadCertificate()
+              break
+            case "p":
+              e.preventDefault()
+              if (validateForm()) previewCertificate()
+              break
+          }
+        }
+      })
+
+      // Add tooltips for keyboard shortcuts
+      document.addEventListener("DOMContentLoaded", function () {
+        const shortcuts = document.createElement("div")
+        shortcuts.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: rgba(0,0,0,0.8);
+                color: white;
+                padding: 10px;
+                border-radius: 5px;
+                font-size: 12px;
+                z-index: 1000;
+                display: none;
+            `
+        shortcuts.innerHTML = `
+                <div><strong>Keyboard Shortcuts:</strong></div>
+                <div>Ctrl+S - Sample Data</div>
+                <div>Ctrl+D - Download PDF</div>
+                <div>Ctrl+P - Preview</div>
+            `
+        document.body.appendChild(shortcuts)
+
+        let timeout
+        document.addEventListener("keydown", function (e) {
+          if (e.ctrlKey || e.metaKey) {
+            shortcuts.style.display = "block"
+            clearTimeout(timeout)
+            timeout = setTimeout(() => {
+              shortcuts.style.display = "none"
+            }, 2000)
+          }
+        })
+      })
+      async function downloadCertificate() {
+        const originalText =
+          '<span class="btn-icon">📄</span>Download PDF Certificate'
+        setButtonLoading("downloadBtn", true, "Generating Certificate")
+        showStatus(
+          '<span class="loading-spinner"></span>Generating professional certificate...',
+          "loading"
+        )
+
+        try {
+          const data = getFormData()
+          const response = await fetch(
+            `${API_BASE_URL}/generate-certificate-file`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            }
+          )
+
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+          }
+
+          const blob = await response.blob()
+          const url = window.URL.createObjectURL(blob)
+          const link = document.createElement("a")
+          link.href = url
+          link.download = `professional_certificate_${
+            data.certificate_id || "unknown"
+          }.pdf`
+          document.body.appendChild(link)
+          link.click()
+          document.body.removeChild(link)
+          window.URL.revokeObjectURL(url)
+
+          showStatus(
+            "🎉 Professional certificate generated and downloaded successfully!",
+            "success"
+          )
+        } catch (error) {
+          console.error("Error:", error)
+          showStatus(
+            `❌ Error generating certificate: ${error.message}`,
+            "error"
+          )
+        } finally {
+          setButtonLoading("downloadBtn", false, originalText)
+        }
+      }
+    </script>
+  </body>
+</html>
